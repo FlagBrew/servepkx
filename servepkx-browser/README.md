@@ -1,4 +1,4 @@
-# PKSMBrowserInject by zaksabeast
+# servepkx-browser by zaksabeast
 Helps Inject PK7 Files onto a 3ds with PKSM - works on Desktop and Mobile
 
 ## Usage
