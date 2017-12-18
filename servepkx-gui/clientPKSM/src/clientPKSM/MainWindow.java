@@ -19,13 +19,15 @@ public class MainWindow {
 	private File[] files;
 	private String host;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	/// Launch
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
 					MainWindow window = new MainWindow();
 					window.frmPksmClient.setVisible(true);
 				} catch (Exception e) {
@@ -35,17 +37,15 @@ public class MainWindow {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public MainWindow() {
+	/// Create the application
+	public MainWindow()
+	{
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	/// Initialize
+	private void initialize()
+	{
 		frmPksmClient = new JFrame();
 		frmPksmClient.setTitle("servepkx");
 		frmPksmClient.setBounds(100, 100, 486, 401);
@@ -64,31 +64,33 @@ public class MainWindow {
 		JButton btnConfirm = new JButton("Confirm IP Address");
 		btnConfirm.setBounds(150, 80, 191, 52);
 		frmPksmClient.getContentPane().add(btnConfirm);
-		btnConfirm.addActionListener(new ActionListener() {
-
+		
+		btnConfirm.addActionListener(new ActionListener()
+		{
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (txtHost.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(frmPksmClient, "You MUST enter a valid IP address!", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				} else {
+			public void actionPerformed(ActionEvent e)
+			{
+				if (txtHost.getText().isEmpty())
+				{
+					JOptionPane.showMessageDialog(frmPksmClient, "You MUST enter a valid IP address!", "Error",	JOptionPane.ERROR_MESSAGE);
+				} 
+				else
+				{
 					host = txtHost.getText();
-					JOptionPane.showMessageDialog(frmPksmClient,
-							"The following IP Address is currently set\nHost: " + host);
+					JOptionPane.showMessageDialog(frmPksmClient, "The following IP Address is currently set\nHost: " + host);
 				}
 			}
-
 		});
 
 		JButton btnSelectFiles = new JButton("Select .pk6/.pk7 files");
 		btnSelectFiles.setBounds(150, 159, 191, 52);
 		frmPksmClient.getContentPane().add(btnSelectFiles);
-		btnSelectFiles.addActionListener(new ActionListener() {
-
+		
+		btnSelectFiles.addActionListener(new ActionListener()
+		{
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
+			public void actionPerformed(ActionEvent e)
+			{
 				final JFileChooser fc = new JFileChooser();
 				fc.setMultiSelectionEnabled(true);
 				fc.setDragEnabled(true);
@@ -96,7 +98,6 @@ public class MainWindow {
 				fc.showOpenDialog(frmPksmClient);
 
 				files = fc.getSelectedFiles();
-
 			}
 		});
 
@@ -104,27 +105,28 @@ public class MainWindow {
 		btnSendFiles.setBounds(150, 240, 191, 52);
 		frmPksmClient.getContentPane().add(btnSendFiles);
 		
-		JLabel lblPksmClientV = new JLabel("servepkx v1.1 - Made by Slownic. To use with PKSM, by Bernardo Giordano.");
+		JLabel lblPksmClientV = new JLabel("servepkx v1.2 - Made by Slownic. To use with PKSM, by Bernardo Giordano.");
 		lblPksmClientV.setBounds(20, 338, 450, 14);
 		frmPksmClient.getContentPane().add(lblPksmClientV);
+		
 		btnSendFiles.addActionListener(new ActionListener() {
-
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
+			public void actionPerformed(ActionEvent e)
+			{
 				Client client = new Client(host);
 				String result = "The following files have been sent:\n";
 
-				for (int i = 0; i < files.length; i++) {
-					client.sendPKM(files[i]);
-					result = (result + "\n" + files[i].getAbsolutePath());
+				for (int i = 0; i < files.length; i++)
+				{
+					if (client.queue(files[i]))
+					{
+						result = (result + "\n" + files[i].getName());
+					}
 				}
-
-				JOptionPane.showMessageDialog(frmPksmClient, result, "Files sent successfully!",
-						JOptionPane.INFORMATION_MESSAGE);
-
+				
+				client.send();
+				JOptionPane.showMessageDialog(frmPksmClient, result, "Files sent successfully!", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 	}
-
 }
