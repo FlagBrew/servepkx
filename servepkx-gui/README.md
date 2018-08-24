@@ -1,6 +1,6 @@
 # servepkx (java)
 
-Java Client to send .pk6/.pk7 files to a server running on [PKSM](https://github.com/BernardoGiordano/PKSM)
+Java Client to send .pk6/.pk7 files to a server running on [PKSM](https://github.com/FlagBrew/PKSM)
 
 ### Prerequisites
 

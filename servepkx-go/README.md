@@ -1,7 +1,7 @@
 # servepkx-go by Allen Lydiard
 
 This is a small program built in golang that allows you to upload a pokemon
-or multiple pokemon to PKSM through it's wireless server feature.
+or multiple pokemon to [PKSM](https://github.com/FlagBrew/PKSM) through it's wireless server feature.
 
 Thank you to zaksabeast for a bit of logic that I borrowed from his 
 servepkx-browser tool.
