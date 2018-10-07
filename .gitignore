@@ -4,3 +4,6 @@ java/build
 go/servepkx.exe
 go/servepkx_linux
 go/servepkx_mac
+servepkx-spring-boot/target
+.idea
+*.iml
