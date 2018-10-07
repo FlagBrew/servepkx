@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.flagbrew</groupId>
-    <artifactId>servepkx-spring-boot</artifactId>
+    <artifactId>servepkx</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>servepkx-spring-boot</name>
-    <description>Demo project for Spring Boot</description>
+    <name>servepkx</name>
+    <description>Self hosted servepkx browser version</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -38,6 +38,7 @@
     </dependencies>
 
     <build>
+        <finalName>servepkx</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
