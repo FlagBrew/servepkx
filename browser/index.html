@@ -52,35 +52,11 @@
                 reader.readAsArrayBuffer(input.files[0]);
                 reader.onload = function(){
                     var pokeIpAddr = document.getElementById("3dsIp").value;
-                    //check if file != 232 bytes and if 3ds ip is set
-					var size = input.files[0].size;
-                    if( (size == 232 || size == 264 || size == 784) && pokeIpAddr != ""){
-						var payloadSize = size+7;
-						if (payloadSize >= 273) {
-							payloadSize = 273;
-						}
-                        document.getElementById("pksmInput").type = "hidden";
-                        document.getElementById("info").innerHTML = "";
-                        var j = size == 784 ? 520 : 0,
-                            pksm = [0x50, 0x4B, 0x53, 0x4D, 0x4F, 0x54, 0x41],
-                            pk7 = new Uint8Array(reader.result),
-                            pkx = new Uint8Array(payloadSize);
-                        for (var i = 0; i<7; i++){
-                            pkx[i] = pksm[i];
-                        }
-                        for(var i = 7; i<payloadSize; i++){
-                            pkx[i] = pk7[j];
-                            j++;
-                        }
                         xhr  = new XMLHttpRequest();
-                        xhr.open("POST", 'http://'+pokeIpAddr+':9000', true);
-                        xhr.send(pkx);
-                    } else {
-                        var error = pokeIpAddr=="" ? "IP is correct" : "PKX/WCX is Valid";
-                        document.getElementById("info").innerHTML = "Please make sure your "+error;
+                        xhr.open("POST", "http://" +pokeIpAddr+':34567', true);
+                        xhr.send(reader.result);
                     }
                 }
-            }
             String.prototype.paddingLeft = function (paddingValue) {
                 return String(paddingValue + this).slice(-paddingValue.length);
             };
